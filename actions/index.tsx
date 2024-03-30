@@ -23,10 +23,10 @@ function Spinner() {
 
 function ChainInfoCard({ chainInfo }: any) {
     return (
-        <Card className="bg-green-500">
+        <Card>
             <CardHeader>
                 <CardTitle>Vara Blockchain Info</CardTitle>
-                <CardDescription>Web3’s highest-
+                <CardDescription className="">Web3’s highest-
                     performing layer-1 decentralized network.</CardDescription>
             </CardHeader>
             <CardContent className="flex gap-2">
