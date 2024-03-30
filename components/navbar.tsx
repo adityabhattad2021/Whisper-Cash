@@ -50,7 +50,9 @@ export default function Navbar() {
     return (
         <div className="fixed w-full z-50 flex justify-between items-center py-2 px-4 border-b border-primary/10 bg-secondary h-16">
             <div className="flex items-center">
-                <MobileSidebar />
+                <div className="flex md:hidden">
+                    <MobileSidebar />
+                </div>
                 <Link
                     href="/"
                 >
@@ -62,7 +64,7 @@ export default function Navbar() {
                 <div className="hidden md:flex gap-6 pr-20">
                     {routes.map((route) => {
                         return (
-                            <Button variant="ghost" onClick={() =>router.push(route.href)} key={route.href}>
+                            <Button variant="ghost" onClick={() => router.push(route.href)} key={route.href}>
                                 <h1 className={cn("font-bold text-lg cursor-pointer", font.className)} >
                                     {route.label}
                                 </h1>
@@ -70,7 +72,7 @@ export default function Navbar() {
                         )
                     })}
                 </div>
-                <Button size="sm" onClick={() => {}}>
+                <Button size="sm" onClick={() => { }}>
                     Connect
                     <Wallet
                         className="h-4 w-4 fill-white ml-2"

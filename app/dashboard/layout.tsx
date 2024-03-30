@@ -10,7 +10,7 @@ type Props = {
   
 export default function MainLayout({
     children,
-  }: Props) {
+}: Props) {
 
     const [isMounted,setIsMounted] = useState(false);
 
@@ -23,7 +23,7 @@ export default function MainLayout({
     }
 
     return (
-      <div suppressHydrationWarning>
+      <div>
         <MobileHeader />
         <Sidebar className="hidden lg:flex" />
         <main className="lg:pl-[256px] h-full pt-[50px] lg:pt-0">
