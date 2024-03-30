@@ -31,8 +31,7 @@ export default function RootLayout({
           >
             <div className="flex flex-col justify-between h-screen">
               <main className="flex flex-col h-full">
-                <Navbar />
-                <main className="px-4 py-4 mt-20 h-full">{children}</main> 
+                <main className="px-4 py-4 h-full">{children}</main> 
               </main>
               {/* <Footer /> */}
             </div>
