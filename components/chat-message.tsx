@@ -30,7 +30,7 @@ export default function ChatMessage({
             message.role === "user" && "justify-end"
         )}>
             {message.role !== "user" && <BotAvatar/>}
-            <div className="rounded-md px-4 py-2 max-w-sm text-sm bg-primary/10">
+            <div className="rounded-md px-4 py-2 max-w-sm text-sm bg-green-500 font-medium">
                 {isLoading ? <BeatLoader size={5} color={theme === "light" ? "black" : "white"} /> : (
                     <div>
                         {message.display}
