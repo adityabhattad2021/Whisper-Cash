@@ -1,15 +1,67 @@
+"use client"
 import Image from "next/image";
+import localFont from "next/font/local";
+import { Poppins } from "next/font/google";
+import { Medal } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { useTheme } from "next-themes";
+
+const headingFont = localFont({
+  src: "../public/fonts/font.woff2"
+});
+
+const textFont = Poppins({
+  subsets: ["latin"],
+  weight: [
+    "100",
+    "200",
+    "300",
+    "400",
+    "500",
+    "600",
+    "700",
+    "800",
+    "900"
+  ],
+});
+
 
 export default function Home() {
+  const { theme } = useTheme();
+
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="text-4xl font-bold">Welcome to Vara Chat</h1>
-      <div className="flex flex-col items-center">
-        <Image src="/logo.png" alt="Vara Chat" width={200} height={200} />
-        <p className="text-lg mt-4">
-          A simple chat application built with Next.js.
-        </p>
+    <div className="flex items-center justify-center flex-col">
+      <div className={cn(
+        "flex items-center justify-center flex-col",
+        headingFont.className,
+      )}>
+        <div className="mb-4 text-sm flex items-center border shadow-sm py-2 px-4 bg-amber-100 text-amber-700 rounded-full uppercase">
+          Powered by Vara Blockchain
+        </div>
+        <h1 className={cn("text-3xl md:text-6xl text-center text-white mb-6", theme === "light" && "text-black")}>
+          WispherCash
+        </h1>
+        <div className="text-2xl md:text-5xl bg-gradient-to-r from-[#31FAC6] to-[#179675] text-white px-4 p-2 rounded-md  w-fit">
+          AI Wallet.
+        </div>
       </div>
-    </main>
+      <div className={cn(
+        "text-sm md:text-xl text-neutral-400 mt-4 max-w-xs md:max-w-2xl text-center mx-auto",
+        textFont.className,
+      )}>
+       
+          WispherCash is a ai wallet that allows you to send and receive money from anywhere in the world, with just plain english.
+      </div>
+      <Button className="mt-6" size="lg" asChild>
+        <Link href="/sign-up">
+          Get started
+        </Link>
+      </Button>
+    </div>
+
   );
 }
