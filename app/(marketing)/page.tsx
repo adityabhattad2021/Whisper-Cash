@@ -54,7 +54,7 @@ export default function Home() {
           WispherCash is a ai wallet that allows you to send and receive money from anywhere in the world, with just plain english.
       </div>
       <Button className="mt-6" size="lg" asChild>
-        <Link href="/sign-up">
+        <Link href="/chat">
           Get started
         </Link>
       </Button>

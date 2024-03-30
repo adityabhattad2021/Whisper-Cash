@@ -6,10 +6,11 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
+import { ProgramMetadata } from "@gear-js/api";
+import { web3Accounts, web3Enable, web3FromAddress } from '@polkadot/extension-dapp';
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -61,6 +62,38 @@ async function getChainInfo({ }: getChainInfoProps) {
         nodeVersion: nodeVersion,
     };
 }
+
+async function transferTokens(receiverWalletAddr:string,amount:number){
+    const gearApi = await GearApi.create({
+        providerAddress: 'wss://testnet.vara.network',
+    });
+    try{
+        // Transfer Contract Address.
+        const allAccounts = await web3Accounts();
+
+        console.log(allAccounts);
+
+        if (allAccounts.length === 0) {
+            return;
+        }
+        const signerAddr=allAccounts[0];
+        const injector = await web3FromAddress(signerAddr.address);
+        await gearApi.tx.balances
+                        .transfer(receiverWalletAddr, amount)
+                        .signAndSend(
+                            signerAddr.address,
+                            // @ts-ignore
+                            { signer: injector.signer },
+                            ({ status }) => {
+                                console.log(`Current status is ${status}`);
+                            }
+                        )
+        
+    }catch(error){
+        console.error(error);
+    }
+}
+
 
 // @ts-ignore
 async function submitUserMessage(userInput: string) {

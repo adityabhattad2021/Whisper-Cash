@@ -40,15 +40,15 @@ export default function Navbar() {
     const router = useRouter();
 
     const [account, setAccount] = useState<InjectedAccountWithMeta[]>([]);
-    const [selectedAccount, setSelectedAccount] = useState<InjectedAccountWithMeta>();
+    const [selectedAccount, setSelectedAccount] = useState<InjectedAccountWithMeta | null>(null);
 
     const [isMounted, setIsMounted] = useState(false);
 
     async function connectWalletFunc() {
         const { web3Enable, web3Accounts } = await import("@polkadot/extension-dapp");
-        const extensions = web3Enable("Polki");
+        const extensions =await web3Enable("WhispherCash");
 
-        if (!extensions) {
+        if (extensions.length===0) {
             alert("No Extension Found");
         }
 
@@ -63,7 +63,7 @@ export default function Navbar() {
     }
 
     useEffect(() => {
-        setIsMounted(true)
+        setIsMounted(true);
     }, [])
 
     if (!isMounted) return null;
@@ -94,7 +94,7 @@ export default function Navbar() {
                     })}
                 </div>
                 <Button size="sm" onClick={() => connectWalletFunc()}>
-                    Connect
+                    {selectedAccount === null ? 'Connect' : 'Disconnect'}
                     <Wallet
                         className="h-4 w-4 fill-white ml-2"
                     />
