@@ -2,7 +2,7 @@
 import ChatHeader from "@/components/chat-header";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import { useCompletion } from "ai/react";
+import { getChainInfo } from "@/actions/get-chain-info";
 import ChatForm from "@/components/chat-form";
 import ChatMessages from "@/components/chat-messages";
 import { ChatMessageProps } from "@/components/chat-message";
@@ -10,65 +10,48 @@ import { ChatMessageProps } from "@/components/chat-message";
 
 
 interface ChatClientProps {
-   
+
 };
 
-export default function ChatClient({  }: ChatClientProps) {
+export default function ChatClient({ }: ChatClientProps) {
 
     const router = useRouter();
     const [messages, setMessages] = useState<ChatMessageProps[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [input, setInput] = useState("");
 
-    // const {
-    //     input,
-    //     isLoading,
-    //     handleInputChange,
-    //     handleSubmit,
-    //     setInput
-    // } = useCompletion({
-    //     api: `/api/chat/${character.id}`,
-    //     onFinish(prompt,completion) {
-    //         const systemMessage: ChatMessageProps = {
-    //             role: "system",
-    //             content: completion,
-    //         }
-    //         console.log(completion);
-            
-    //         setMessages((current) => [...current, systemMessage]);
-    //         setInput("")
-    //         router.refresh();
-    //     },
-    //     onError(error){
-    //         console.log(error);
-    //         router.refresh();
-    //     },
-    //     body:{
-    //         userWalletAddress:address
-    //     }
-    // });
-
-    // function onSubmit(e: FormEvent<HTMLFormElement>) {
-    //     const userMessage: ChatMessageProps = {
-    //         role: "user",
-    //         content: input,
-    //     };
-
-    //     setMessages((current) => [...current, userMessage]);
-    //     handleSubmit(e);
-    // }
-
-    const isLoading = true;
-    const input = "";
-    function handleInputChange(){
-
+    function handleInputChange(e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) {
+        setInput(e.target.value)
     }
-    function onSubmit(){
 
+    function onSubmit(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        if (input.trim() === "") return;
+        setIsLoading(true);
+        const userMessage: ChatMessageProps = {
+            role: "user",
+            content: input
+        }
+        setMessages((current) => [...current, userMessage])
+        getChainInfo({userQuery:input})
+            .then((response) => {
+                const botMessage: ChatMessageProps = {
+                    role: "system",
+                    content: response.message
+                }
+                setMessages((current) => [...current, botMessage])
+                setInput("");
+                setIsLoading(false);
+            })
+            .catch((error)=>{
+                console.error(error)
+            })
     }
-   
-    
+
+
     return (
         <div className="flex flex-col h-full w-full">
-            <ChatHeader  />
+            <ChatHeader />
             <ChatMessages
                 isLoading={isLoading}
                 messages={messages}
