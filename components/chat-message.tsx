@@ -11,52 +11,33 @@ import { Copy } from "lucide-react";
 
 
 export interface ChatMessageProps {
-    role: "system" | "user";
-    content?: string;
-    isLoading?: boolean;
-    src?: string;
+    message:any;
+    isLoading:boolean;
 }
 
 export default function ChatMessage({
-    role,
-    content,
-    isLoading,
-    src
+    message,
+    isLoading
 }: ChatMessageProps) {
 
     // const { toast } = useToast();
     const { theme } = useTheme();
 
-    function copyToClipboard() {
-        if (!content) {
-            return;
-        }
-        navigator.clipboard.writeText(content);
-        // toast({
-        //     description: "Message copied to clipboard"
-        // });
-    }
 
     return (
         <div className={cn(
             "group flex items-center gap-x-3 py-4 w-full ",
-            role === "user" && "justify-end"
+            message.role === "user" && "justify-end"
         )}>
-            {role !== "user" && src && <BotAvatar/>}
+            {message.role !== "user" && <BotAvatar/>}
             <div className="rounded-md px-4 py-2 max-w-sm text-sm bg-primary/10">
-                {isLoading ? <BeatLoader size={5} color={theme === "light" ? "black" : "white"} /> : content}
+                {isLoading ? <BeatLoader size={5} color={theme === "light" ? "black" : "white"} /> : (
+                    <div>
+                        {message.display}
+                    </div>
+                )}
             </div>
-            {role === "user" && <UserAvatar />}
-            {role !== "user" && !isLoading && (
-                <Button
-                    className="opacity-0 group-hover:opacity-100 transition"
-                    onClick={copyToClipboard}
-                    size="icon"
-                    variant="ghost"
-                >
-                    <Copy className="w-4 h-4" />
-                </Button>
-            )}
+            {message.role === "user" && <UserAvatar />}
         </div>
     )
 }

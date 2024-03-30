@@ -1,6 +1,5 @@
 "use client"
 import ChatHeader from "@/components/chat-header";
-import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import ChatForm from "@/components/chat-form";
 import ChatMessages from "@/components/chat-messages";
@@ -36,6 +35,7 @@ export default function ChatClient({ }: ChatClientProps) {
             {
                 id: Date.now(),
                 display: <div>{input}</div>,
+                role:"user"
             },
         ]);
 
@@ -54,42 +54,27 @@ export default function ChatClient({ }: ChatClientProps) {
     return (
         <div className="flex flex-col h-full w-full">
             <ChatHeader />
-            {/* <ChatMessages
+            <ChatMessages
                 isLoading={isLoading}
                 messages={messages}
-            /> */}
-            {
+            />
+            {/* {
                 // View messages in UI state
                 // @ts-ignore
-                messages.map((message) => (
-                    <div key={message.id}>
-                        {message.display}
-                    </div>
-                ))
-            }
-            <form
-            onSubmit={onSubmit}
-            className="border-t border-primary/10 py-4 flex items-center gap-x-2 px-4"
-            >
-            <Input
-                disabled={isLoading}
-                value={input}
-                onChange={handleInputChange}
-                placeholder="Type your message"
-                className="rounded-lg bg-primary/10"
-            />
-            <Button disabled={isLoading} variant={"ghost"} size={"icon"}>
-                <SendHorizonal
-                    className="h-4 w-4"
-                />
-            </Button>
-        </form>
-            {/* <ChatForm
+                messages.map((message) => {
+                    return (
+                        <div key={message.id} className="border-2">
+                            {message.display}
+                        </div>
+                    )
+                })
+            } */}
+            <ChatForm
                 isLoading={isLoading}
                 input={input}
                 handleInputChange={handleInputChange}
                 handleOnSubmit={onSubmit}
-            /> */}
+            />
         </div>
     )
 }

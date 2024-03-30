@@ -7,7 +7,7 @@ interface UserAvatarProps{
 
 export default function UserAvatar({src}:UserAvatarProps){
     return (
-        <Avatar className="h-12 w-12">
+        <Avatar className="h-12 w-12 flex justify-center items-center">
             <UserIcon/>
         </Avatar>
     )

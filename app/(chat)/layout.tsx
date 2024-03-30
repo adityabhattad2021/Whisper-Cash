@@ -1,4 +1,4 @@
-import { AI } from "@/app/action";
+import { AI } from "@/actions";
 import { MobileHeader } from "@/components/mobile-header";
 import Sidebar from "@/components/sidebar";
 

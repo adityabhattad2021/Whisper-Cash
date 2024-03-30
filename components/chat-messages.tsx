@@ -30,18 +30,13 @@ export default function ChatMessages({ messages = [], isLoading }: ChatMessagesP
 
     return (
         <div className="flex-1 overflow-y-auto pr-4 h-[70%]">
-            <ChatMessage
-                isLoading={fakeLoading}
-                role="system"
-                content={`Hey, try asking me anything about vara blockchain.`}
-            />
             {
-                messages.map((message) => {
+                messages.map((message,index) => {
                     return (
                         <ChatMessage
-                            key={message.content}
-                            role={message.role}
-                            content={message.content}
+                            key={index}
+                            isLoading={isLoading}
+                            message={message}
                         />
                     )
                 })
@@ -49,7 +44,7 @@ export default function ChatMessages({ messages = [], isLoading }: ChatMessagesP
             {
                 isLoading && (
                     <ChatMessage
-                        role="system"
+                        message={""}
                         isLoading
                     />
                 )
