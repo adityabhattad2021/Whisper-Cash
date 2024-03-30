@@ -15,7 +15,9 @@ import { Input } from "@/components/ui/input";
 
 
 export default function TransferTokensCard({params}:any){
-    const [receiverWalletAddr,setReceiverWalletAddr]=useState('5Ev9nU...8BrrArszxy');
+    console.log(params);
+    
+    const [receiverWalletAddr,setReceiverWalletAddr]=useState();
     const [amount,setAmount]=useState<any>(params.amount);
 
     async function transferTokens(receiverWalletAddr:string,amount:number){
@@ -55,10 +57,18 @@ export default function TransferTokensCard({params}:any){
                 <CardDescription className="">Transfer tokens to any wallet address.</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-2 justify-center">
-                <Input type="text" onChange={(e)=>setReceiverWalletAddr(e.target.value)} placeholder="Receiver Wallet Address"/>
+
+                <Input type="text" value={receiverWalletAddr} onChange={(e)=>{
+                    // @ts-ignore
+                    setReceiverWalletAddr(e.target.value)
+                }} placeholder="Receiver Wallet Address"/>
                 <Input type="number" onChange={(e)=>setAmount(e.target.value)} placeholder="Amount"/>
                 <Button
-                    onClick={()=>transferTokens(receiverWalletAddr,amount)}
+                    onClick={()=>{
+                        // @ts-ignore
+                        transferTokens(receiverWalletAddr,amount)
+                    }}
+                    value={amount}
                     className="w-full"
                     variant={"secondary"}
                 >Transfer</Button>
