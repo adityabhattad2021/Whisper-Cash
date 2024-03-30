@@ -12,6 +12,13 @@ import { useEffect, useState } from "react";
 import { Plus, Settings, StoreIcon, User2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Logo } from "./logo";
+import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
+import dynamic from 'next/dynamic';
+
+// @ts-ignore
+const web3Accounts = dynamic(() => import('@polkadot/extension-dapp'), { ssr: false });
+// @ts-ignore
+const web3Enable = dynamic(() => import('@polkadot/extension-dapp'), { ssr: false });
 
 const font = Poppins({
     weight: "600",
@@ -20,16 +27,9 @@ const font = Poppins({
 
 const routes = [
     {
-        icon: StoreIcon,
-        href: "/TODO",
-        label: "#",
-        logined: false
-    },
-
-    {
         icon: User2,
-        href: "/profile",
-        label: "Profile",
+        href: "/chat",
+        label: "Dashboard",
         logined: true,
     },
 ]
@@ -39,7 +39,28 @@ export default function Navbar() {
 
     const router = useRouter();
 
+    const [account, setAccount] = useState<InjectedAccountWithMeta[]>([]);
+    const [selectedAccount, setSelectedAccount] = useState<InjectedAccountWithMeta>();
+
     const [isMounted, setIsMounted] = useState(false);
+
+    async function connectWalletFunc() {
+        const { web3Enable, web3Accounts } = await import("@polkadot/extension-dapp");
+        const extensions = web3Enable("Polki");
+
+        if (!extensions) {
+            alert("No Extension Found");
+        }
+
+        const allAccounts = await web3Accounts();
+
+        console.log(allAccounts);
+
+        if (allAccounts.length === 1) {
+            setSelectedAccount(allAccounts[0]);
+        }
+
+    }
 
     useEffect(() => {
         setIsMounted(true)
@@ -72,7 +93,7 @@ export default function Navbar() {
                         )
                     })}
                 </div>
-                <Button size="sm" onClick={() => { }}>
+                <Button size="sm" onClick={() => connectWalletFunc()}>
                     Connect
                     <Wallet
                         className="h-4 w-4 fill-white ml-2"
