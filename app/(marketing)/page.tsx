@@ -1,8 +1,6 @@
 "use client"
-import Image from "next/image";
 import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
-import { Medal } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -10,13 +8,12 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 
 const headingFont = localFont({
-  src: "../public/fonts/font.woff2"
+  src: '../../public/fonts/font.woff2',
 });
 
 const textFont = Poppins({
   subsets: ["latin"],
   weight: [
-    "100",
     "200",
     "300",
     "400",
@@ -24,7 +21,7 @@ const textFont = Poppins({
     "600",
     "700",
     "800",
-    "900"
+    "900",
   ],
 });
 
@@ -42,8 +39,8 @@ export default function Home() {
         <div className="mb-4 text-sm flex items-center border shadow-sm py-2 px-4 bg-amber-100 text-amber-700 rounded-full uppercase">
           Powered by Vara Blockchain
         </div>
-        <h1 className={cn("text-3xl md:text-6xl text-center text-white mb-6", theme === "light" && "text-black")}>
-          WispherCash
+        <h1 className={cn("text-4xl md:text-7xl text-center text-white mb-6", theme === "light" && "text-black")}>
+          Wispher Cash
         </h1>
         <div className="text-2xl md:text-5xl bg-gradient-to-r from-[#31FAC6] to-[#179675] text-white px-4 p-2 rounded-md  w-fit">
           AI Wallet.

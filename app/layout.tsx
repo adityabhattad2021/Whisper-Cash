@@ -3,10 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
-
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -28,13 +24,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="h-full ">
-            <Navbar />
-            <main className="pt-40 pb-20">
-              {children}
-            </main>
-            <Footer />
-          </div>
+          {children}
         </ThemeProvider>
       </body>
     </html>

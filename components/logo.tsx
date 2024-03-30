@@ -1,14 +1,10 @@
 "use client"
 import Link from "next/link";
 import Image from "next/image";
-import localFont from "next/font/local";
 
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 
-const headingFont = localFont({
-  src: "../public/fonts/font.woff2",
-});
 
 export const Logo = () => {
     const {theme}=useTheme();
@@ -23,10 +19,9 @@ export const Logo = () => {
         />
         <p className={cn(
           "text-lg text-white pb-1",
-          headingFont.className,
             theme === "light" && "text-black"
         )}>
-          wisper chat
+          wispher cash
         </p>
       </div>
     </Link>
