@@ -17,8 +17,8 @@ import { Input } from "@/components/ui/input";
 export default function TransferTokensCard({params}:any){
     console.log(params);
     
-    const [receiverWalletAddr,setReceiverWalletAddr]=useState();
-    const [amount,setAmount]=useState<any>(params.amount);
+    const [receiverWalletAddr,setReceiverWalletAddr]=useState(params.receiverWalletAddr || '5Ev9nUBbdPDb....oF8BrrArszxy');
+    const [amount,setAmount]=useState<any>(params.amount||50);
 
     async function transferTokens(receiverWalletAddr:string,amount:number){
         const gearApi = await GearApi.create({
