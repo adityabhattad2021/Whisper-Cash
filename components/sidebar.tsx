@@ -30,7 +30,7 @@ const availableTokens = [
 export default function Sidebar({ className }: Props) {
   return (
     <div className={cn(
-      "flex h-full lg:w-[256px] lg:fixed left-0 top-0 px-4 py-6 border-r-2 flex-col",
+      "flex h-full lg:w-[322px] lg:fixed left-0 top-0 px-4 py-6 border-r-2 flex-col",
       className,
     )}>
       <div className="px-2 pb-6">

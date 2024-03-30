@@ -62,12 +62,12 @@ export default function ChatClient({  }: ChatClientProps) {
 
     }
     function onSubmit(){
-        
+
     }
    
     
     return (
-        <div className="flex flex-col h-full p-4 space-y-2">
+        <div className="flex flex-col h-full w-full">
             <ChatHeader  />
             <ChatMessages
                 isLoading={isLoading}

@@ -17,7 +17,7 @@ export default function ChatForm({ input, handleInputChange, handleOnSubmit, isL
     return (
         <form
             onSubmit={handleOnSubmit}
-            className="border-t border-primary/10 py-4 flex items-center gap-x-2"
+            className="border-t border-primary/10 py-4 flex items-center gap-x-2 px-4"
         >
             <Input
                 disabled={isLoading}

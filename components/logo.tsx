@@ -21,11 +21,11 @@ export const Logo = ({className}:LogoProps) => {
           width={30}
         />
         <p className={cn(
-          "text-lg text-white pb-1 font-bold lowercase",
+          "text-lg text-white pb-1 font-bold",
             theme === "light" && "text-black",
             className
         )}>
-          wispher cash
+          WhispherCash
         </p>
       </div>
     </Link>

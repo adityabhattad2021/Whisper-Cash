@@ -29,7 +29,7 @@ export default function ChatMessages({ messages = [], isLoading }: ChatMessagesP
     }, [messages.length])
 
     return (
-        <div className="flex-1 overflow-y-auto pr-4">
+        <div className="flex-1 overflow-y-auto pr-4 h-[70%]">
             <ChatMessage
                 isLoading={fakeLoading}
                 role="system"
