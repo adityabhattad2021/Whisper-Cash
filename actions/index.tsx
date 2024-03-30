@@ -9,8 +9,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { ProgramMetadata } from "@gear-js/api";
-import { web3Accounts, web3Enable, web3FromAddress } from '@polkadot/extension-dapp';
+import TransferTokensCard from "@/components/transfer-token-card";
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -20,6 +19,7 @@ const openai = new OpenAI({
 function Spinner() {
     return <div>Loading...</div>;
 }
+
 
 
 function ChainInfoCard({ chainInfo }: any) {
@@ -38,6 +38,8 @@ function ChainInfoCard({ chainInfo }: any) {
         </Card>
     );
 }
+
+
 
 type getChainInfoProps = {
 
@@ -63,36 +65,11 @@ async function getChainInfo({ }: getChainInfoProps) {
     };
 }
 
-async function transferTokens(receiverWalletAddr:string,amount:number){
-    const gearApi = await GearApi.create({
-        providerAddress: 'wss://testnet.vara.network',
-    });
-    try{
-        // Transfer Contract Address.
-        const allAccounts = await web3Accounts();
 
-        console.log(allAccounts);
-
-        if (allAccounts.length === 0) {
-            return;
-        }
-        const signerAddr=allAccounts[0];
-        const injector = await web3FromAddress(signerAddr.address);
-        await gearApi.tx.balances
-                        .transfer(receiverWalletAddr, amount)
-                        .signAndSend(
-                            signerAddr.address,
-                            // @ts-ignore
-                            { signer: injector.signer },
-                            ({ status }) => {
-                                console.log(`Current status is ${status}`);
-                            }
-                        )
-        
-    }catch(error){
-        console.error(error);
-    }
+function setTransferParams(receieverAddr:string,amount:number){
+    return {receiverAddr:receieverAddr,amount:amount};
 }
+
 
 
 // @ts-ignore
@@ -145,6 +122,26 @@ async function submitUserMessage(userInput: string) {
                         }
                     ])
                     return <ChainInfoCard chainInfo={chainInfo} />
+                }
+            },
+            transfer_tokens: {
+                description: "Transfer tokens to any wallet address.",
+                parameters: z.object({
+                    receiverAddr: z.string(),
+                    amount: z.number()
+                }),
+                render: async function* ({ receiverAddr, amount }) {
+                    yield <Spinner />
+                    const params=setTransferParams(receiverAddr,amount);
+                    aiState.done([
+                        aiState.get(),
+                        {
+                            role: "function",
+                            name: "transfer_tokens",
+                            content: JSON.stringify(params),
+                        }
+                    ])
+                    return <TransferTokensCard params={params}/>
                 }
             },
         }
