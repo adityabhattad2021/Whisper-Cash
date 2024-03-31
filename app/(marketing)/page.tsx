@@ -1,7 +1,7 @@
 "use client"
 import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
-
+import TypeWriterComponent from "typewriter-effect"
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -40,18 +40,29 @@ export default function Home() {
           Powered by Vara Blockchain
         </div>
         <h1 className={cn("text-4xl md:text-7xl text-center text-white mb-6", theme === "light" && "text-black")}>
-          Wispher Cash
+          Whisper Cash
         </h1>
         <div className="text-2xl md:text-5xl bg-gradient-to-r from-[#31FAC6] to-[#179675] text-white px-4 p-2 rounded-md  w-fit">
-          AI Wallet.
+          <TypeWriterComponent
+            options={{
+              strings: [
+                "send 5 tokens to harshal.vara",
+                "what is my balance.",
+                "swap WETH with testVara.",
+                "ask me anything!",
+              ],
+              autoStart: true,
+              loop: true,
+            }}
+          />
         </div>
       </div>
       <div className={cn(
         "text-sm md:text-xl text-neutral-400 mt-4 max-w-xs md:max-w-2xl text-center mx-auto",
         textFont.className,
       )}>
-       
-          WispherCash is a ai wallet that allows you to send and receive money from anywhere in the world, with just plain english.
+
+        WispherCash is a ai wallet that allows you to send and receive money from anywhere in the world, with just plain english.
       </div>
       <Button className="mt-6" size="lg" asChild>
         <Link href="/chat">

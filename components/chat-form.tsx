@@ -16,16 +16,17 @@ interface ChatFormProps {
     setInput: (input: string) => void;
 }
 
-export default function ChatForm({ input, handleInputChange, handleOnSubmit, isLoading ,setInput}: ChatFormProps) {
+export default function ChatForm({ input, handleInputChange, handleOnSubmit, isLoading, setInput }: ChatFormProps) {
     const { startRecording, stopRecording, text } = useRecordVoice();
 
-    useEffect(()=>{
-        if(text){
+    useEffect(() => {
+        if (text) {
             setInput(text);
         }
-    },[text])
+    }, [text])
 
     return (
+
         <form
             onSubmit={handleOnSubmit}
             className="border-t border-primary/10 py-4 flex items-center gap-x-2 px-4"
@@ -42,10 +43,14 @@ export default function ChatForm({ input, handleInputChange, handleOnSubmit, isL
                     className="h-4 w-4"
                 />
             </Button>
+
             <Microphone
+                
                 startRecording={startRecording}
                 stopRecording={stopRecording}
             />
         </form>
+
+
     )
 }

@@ -25,7 +25,7 @@ export const Logo = ({className}:LogoProps) => {
             theme === "light" && "text-black",
             className
         )}>
-          WhispherCash
+          WhisperCash
         </p>
       </div>
     </Link>

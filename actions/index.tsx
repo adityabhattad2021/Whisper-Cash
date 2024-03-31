@@ -92,7 +92,7 @@ async function submitUserMessage(userInput: string) {
         model: 'gpt-4-0125-preview',
         provider: openai,
         messages: [
-            { role: 'system', content: 'You are a very helpful vara blockchain assistant, how helps with users queries with vara blockchain and helps them to interact with the vara blockchain' },
+            { role: 'system', content: 'You are a very helpful vara blockchain assistant your name is vara wallet, how helps with users queries with vara blockchain and helps them to interact with the vara blockchain' },
             ...aiState.get()
         ],
         text: ({ content, done }) => {
