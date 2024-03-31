@@ -5,6 +5,7 @@ import { ChangeEvent, FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SendHorizonal } from "lucide-react";
+import { Microphone } from "./microphone";
 
 interface ChatFormProps {
     input: string;
@@ -31,6 +32,7 @@ export default function ChatForm({ input, handleInputChange, handleOnSubmit, isL
                     className="h-4 w-4"
                 />
             </Button>
+            <Microphone/>
         </form>
     )
 }
