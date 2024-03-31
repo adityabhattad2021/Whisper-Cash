@@ -70,6 +70,7 @@ export default function ChatClient({ }: ChatClientProps) {
                 input={input}
                 handleInputChange={handleInputChange}
                 handleOnSubmit={onSubmit}
+                setInput={setInput}
             />
         </div>
     )

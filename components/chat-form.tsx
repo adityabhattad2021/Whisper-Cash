@@ -1,20 +1,30 @@
 "use client";
 
 import type { ChatRequestOptions } from "ai";
-import { ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, FormEvent, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SendHorizonal } from "lucide-react";
 import { Microphone } from "./microphone";
+import { useRecordVoice } from "@/hooks/useRecordVoice";
 
 interface ChatFormProps {
     input: string;
     handleInputChange: (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => void;
     handleOnSubmit: (e: FormEvent<HTMLFormElement>, chatRequestOptions?: ChatRequestOptions | undefined) => void;
     isLoading: boolean;
+    setInput: (input: string) => void;
 }
 
-export default function ChatForm({ input, handleInputChange, handleOnSubmit, isLoading }: ChatFormProps) {
+export default function ChatForm({ input, handleInputChange, handleOnSubmit, isLoading ,setInput}: ChatFormProps) {
+    const { startRecording, stopRecording, text } = useRecordVoice();
+
+    useEffect(()=>{
+        if(text){
+            setInput(text);
+        }
+    },[text])
+
     return (
         <form
             onSubmit={handleOnSubmit}
@@ -32,7 +42,10 @@ export default function ChatForm({ input, handleInputChange, handleOnSubmit, isL
                     className="h-4 w-4"
                 />
             </Button>
-            <Microphone/>
+            <Microphone
+                startRecording={startRecording}
+                stopRecording={stopRecording}
+            />
         </form>
     )
 }

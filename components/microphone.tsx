@@ -4,8 +4,15 @@ import { useRecordVoice } from "@/hooks/useRecordVoice";
 import { Mic } from "lucide-react";
 import { Button } from "./ui/button";
 
-const Microphone = () => {
-  const { startRecording, stopRecording } = useRecordVoice();
+type MicrophoneProps = {
+    startRecording:any;
+    stopRecording: () => void;
+}
+
+const Microphone = ({
+    startRecording,
+    stopRecording
+}:MicrophoneProps) => {
 
   return (
     // Button for starting and stopping voice recording
