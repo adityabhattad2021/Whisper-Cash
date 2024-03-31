@@ -10,6 +10,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import TransferTokensCard from "@/components/transfer-token-card";
+import {BeatLoader} from "react-spinners"
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,

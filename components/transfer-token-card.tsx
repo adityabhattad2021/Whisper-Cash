@@ -7,7 +7,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { web3Accounts, web3Enable, web3FromAddress } from '@polkadot/extension-dapp';
+import { web3Accounts, web3Enable, web3EnablePromise, web3FromAddress } from '@polkadot/extension-dapp';
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,19 +18,22 @@ export default function TransferTokensCard({params}:any){
     console.log(params);
     
     const [receiverWalletAddr,setReceiverWalletAddr]=useState(params.receiverWalletAddr || '5Ev9nUBbdPDb....oF8BrrArszxy');
-    const [amount,setAmount]=useState<any>(params.amount||50);
+    const [amount,setAmount]=useState(params.amount || 50);
 
     async function transferTokens(receiverWalletAddr:string,amount:number){
         const gearApi = await GearApi.create({
             providerAddress: 'wss://testnet.vara.network',
         });
         try{
+            const allInjected = await web3Enable('whisper-cash');
+
             // Transfer Contract Address.
             const allAccounts = await web3Accounts();
     
             console.log(allAccounts);
     
             if (allAccounts.length === 0) {
+                alert("Please Connect Wallet to Make Transaction.")
                 return;
             }
             const signerAddr=allAccounts[0];
@@ -62,13 +65,12 @@ export default function TransferTokensCard({params}:any){
                     // @ts-ignore
                     setReceiverWalletAddr(e.target.value)
                 }} placeholder="Receiver Wallet Address"/>
-                <Input type="number" onChange={(e)=>setAmount(e.target.value)} placeholder="Amount"/>
+                <Input type="number" value={amount} onChange={(e)=>setAmount(e.target.value)} placeholder="Amount"/>
                 <Button
                     onClick={()=>{
                         // @ts-ignore
                         transferTokens(receiverWalletAddr,amount)
                     }}
-                    value={amount}
                     className="w-full"
                     variant={"secondary"}
                 >Transfer</Button>

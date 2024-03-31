@@ -3,11 +3,7 @@ import ChatHeader from "@/components/chat-header";
 import { FormEvent, useState } from "react";
 import ChatForm from "@/components/chat-form";
 import ChatMessages from "@/components/chat-messages";
-import { ChatMessageProps } from "@/components/chat-message";
 import { useUIState, useActions } from "ai/rsc";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { SendHorizonal } from "lucide-react";
 import type { AI } from "../../../action";
 
 
