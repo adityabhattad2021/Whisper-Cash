@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Whisper Cash
+
+Whisper Cash is a natural language-based smart wallet built on the Vara Blockchain. It leverages OpenAI APIs, Vercel's AI SDK, and `@polkadot/extension-dapp` to provide users with a seamless experience when interacting with the Vara blockchain.
+
+## Features
+
+- Interact with the blockchain using natural language commands
+- Dynamic UI rendering based on user interactions
+- Seamless integration with the Vara Blockchain
+
+## Technologies Used
+
+- Next.js: A React framework for building server-side rendered and static web applications
+- Gear-JS API: A JavaScript library for interacting with the Vara Blockchain
+- `@polkadot/extension-dapp`: A browser extension for managing Polkadot accounts and signing transactions
+- Vara Blockchain: A scalable blockchain network
+- Vercel AI SDK: A set of tools and APIs for building AI-powered applications
+- OpenAI APIs: A suite of powerful AI models and APIs for natural language processing and generation
 
 ## Getting Started
 
-First, run the development server:
+To run Whisper Cash locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone the repository and switch to the `add-voice` branch:
+   ```
+   git clone https://github.com/your-username/whisper-cash.git
+   cd whisper-cash
+   git checkout add-voice
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Create a `.env` file in the root directory of the project and add your OpenAI API key:
+   ```
+   OPENAI_API_KEY=your-api-key
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Install the project dependencies:
+   ```
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. Start the development server:
+   ```
+   npm run dev
+   ```
 
-## Learn More
+5. Open your browser and navigate to `http://localhost:3000` to access the Whisper Cash application.
 
-To learn more about Next.js, take a look at the following resources:
+## Project Status
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Please note that Whisper Cash is an experimental project and is actively under development. The `add-voice` branch contains the latest features and improvements.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contributing
 
-## Deploy on Vercel
+We welcome contributions from the community to help improve Whisper Cash. If you encounter any issues or have suggestions for new features, please open an issue on the GitHub repository.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Acknowledgements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+We would like to thank the organizers and sponsors of the ETHMumbai Hackathon for providing the opportunity to build Whisper Cash. Special thanks to the Vara Blockchain team for their excellent support.

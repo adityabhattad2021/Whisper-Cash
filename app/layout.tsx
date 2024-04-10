@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { RecoilContextProvider } from "@/components/providers/RecoilContextProvider";
+
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,14 +22,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <RecoilContextProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="flex flex-col justify-between h-screen">
+              <main className="flex flex-col h-full">
+                <main className="px-4 py-4 h-full">{children}</main> 
+              </main>
+              {/* <Footer /> */}
+            </div>
+          </ThemeProvider>
+        </RecoilContextProvider>
       </body>
     </html>
   );
